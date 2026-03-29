@@ -6,57 +6,49 @@
 
 <title>VNGAS | Desarrollo Técnico Profesional</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <style>
-/* VARIABLES PARA MODO CLARO/OSCURO */
+/* VARIABLES PARA MODO CLARO/OSCURO (MODIFICACIÓN PARA TEMAS) */
 :root {
+  --bg-color: #020617;
+  --text-color: #E2E8F0;
+  --subtext-color: #94A3B8;
+  --terminal-bg: rgba(255,255,255,0.02);
+  --card-border: rgba(255,255,255,0.08);
+  --accent-green: #22C55E;
+  --secondary-btn-border: rgba(255,255,255,0.2);
+  --secondary-btn-text: white;
+  --particle-color: rgba(34, 197, 94, 0.15); /* Color de partículas */
+}
+
+[data-theme="light"] {
   --bg-color: #f8fafc;
   --text-color: #1e293b;
   --subtext-color: #64748b;
-  --card-bg: #ffffff;
-  --card-border: rgba(0,0,0,0.05);
   --terminal-bg: rgba(0,0,0,0.03);
+  --card-border: rgba(0,0,0,0.1);
   --accent-green: #16a34a;
+  --secondary-btn-border: rgba(0,0,0,0.2);
+  --secondary-btn-text: #1e293b;
   --particle-color: rgba(30, 41, 59, 0.1);
-  --primary-btn-bg: #16a34a;
-  --primary-btn-text: #ffffff;
 }
 
-[data-theme="dark"] {
-  --bg-color: #020617;
-  --text-color: #e2e8f0;
-  --subtext-color: #94a3b8;
-  --card-bg: rgba(255,255,255,0.02);
-  --card-border: rgba(255,255,255,0.08);
-  --terminal-bg: rgba(255,255,255,0.02);
-  --accent-green: #22c55e;
-  --particle-color: rgba(34, 197, 94, 0.15);
-  --primary-btn-bg: #22c55e;
-  --primary-btn-text: #020617;
-}
-
-/* RESET & BASE */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-
-html {
-  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--bg-color);
-  color: var(--text-color);
+  background: var(--bg-color); /* Usar variable */
+  color: var(--text-color); /* Usar variable */
   font-family: 'Inter', sans-serif;
   overflow-x: hidden; /* Para las partículas */
 }
 
-/* CONTENEDOR DE PARTÍCULAS */
+/* CONTENEDOR DE PARTÍCULAS (MODIFICACIÓN PARA EFECTO TECH) */
 #particles-js {
   position: fixed;
   top: 0;
@@ -66,71 +58,35 @@ body {
   z-index: -1;
 }
 
-/* UTILITIES */
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
 /* NAV */
 .nav {
-  position: fixed;
-  top: 0;
-  width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 15px 40px;
-  background: rgba(var(--bg-color-rgb), 0.8);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--card-border);
-  z-index: 1000;
+  padding: 20px 40px;
+  border-bottom: 1px solid var(--card-border); /* Usar variable */
+  position: relative; /* Asegurar que esté sobre las partículas */
+  z-index: 10;
 }
 
-.nav-brand {
-  font-weight: 700;
-  font-size: 1.2rem;
-  letter-spacing: 1px;
-}
-
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.nav-links {
-  display: flex;
-  gap: 20px;
-}
-
-.nav-links a {
-  color: var(--subtext-color);
+.nav a {
+  color: var(--subtext-color); /* Usar variable */
   text-decoration: none;
-  font-size: 0.95rem;
+  margin-left: 20px;
 }
 
-.nav-links a:hover {
-  color: var(--accent-green);
-}
-
-/* SELECTOR DE TEMA */
+/* SELECTOR DE TEMA (MODIFICACIÓN PARA MODO MANUAL) */
 .theme-toggle {
   cursor: pointer;
   background: none;
   border: none;
   color: var(--subtext-color);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+  margin-left: 20px;
+  vertical-align: middle;
 }
 
 .theme-toggle:hover {
   color: var(--accent-green);
-}
-
-[data-theme="dark"] .fa-sun,
-[data-theme="light"] .fa-moon {
-  display: none;
 }
 
 /* HERO */
@@ -139,234 +95,151 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  text-align: center;
+  padding: 0 60px;
 }
 
 .hero h1 {
-  font-size: 4rem;
+  font-size: 3.5rem;
   font-weight: 700;
-  margin-bottom: 10px;
 }
 
 .hero p {
-  color: var(--subtext-color);
-  margin-bottom: 30px;
-  max-width: 500px;
+  margin-top: 10px;
+  color: var(--subtext-color); /* Usar variable */
 }
 
 /* TERMINAL STYLE */
 .terminal {
+  margin-top: 30px;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.9rem;
-  color: var(--accent-green);
-  background: var(--terminal-bg);
-  border: 1px solid var(--card-border);
+  color: var(--accent-green); /* Usar variable */
+  background: var(--terminal-bg); /* Usar variable */
+  border: 1px solid var(--card-border); /* Usar variable */
   padding: 20px;
-  max-width: 600px;
-  width: 100%;
+  width: fit-content;
   border-radius: 8px;
-  text-align: left;
-  margin-bottom: 30px;
 }
 
 /* BUTTONS */
 .buttons {
-  display: flex;
-  gap: 15px;
+  margin-top: 30px;
 }
 
 .btn {
-  padding: 12px 24px;
+  padding: 12px 22px;
   border-radius: 6px;
   cursor: pointer;
-  font-weight: 500;
   border: none;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  font-weight: 500;
+  font-family: inherit;
 }
 
 .primary {
-  background: var(--primary-btn-bg);
-  color: var(--primary-btn-text);
-}
-
-.primary:hover {
-  opacity: 0.9;
+  background: var(--accent-green); /* Usar variable */
+  color: black;
 }
 
 .secondary {
-  border: 1px solid var(--card-border);
-  background: var(--card-bg);
-  color: var(--text-color);
-}
-
-.secondary:hover {
-  background: var(--terminal-bg);
+  border: 1px solid var(--secondary-btn-border); /* Usar variable */
+  background: transparent;
+  color: var(--secondary-btn-text); /* Usar variable */
+  margin-left: 10px;
 }
 
 /* SECTIONS */
 .section {
-  padding: 80px 0;
-}
-
-.section-title {
-  font-size: 2rem;
-  margin-bottom: 40px;
-  text-align: center;
+  padding: 80px 60px;
+  max-width: 1100px;
 }
 
 /* CARDS */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-}
-
 .card {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  padding: 30px;
-  border-radius: 12px;
+  border: 1px solid var(--card-border); /* Usar variable */
+  padding: 20px;
+  margin: 15px 0;
+  border-radius: 8px;
   transition: 0.3s ease;
+  background: var(--terminal-bg); /* Usar variable para fondo ligero */
 }
 
 .card:hover {
-  border-color: var(--accent-green);
-  transform: translateY(-5px);
+  border-color: var(--accent-green); /* Usar variable */
+  transform: translateY(-3px);
 }
 
-.card h3 {
-  margin-bottom: 10px;
-}
-
-.card p {
+/* CONTACTO (MODIFICACIÓN PARA ICONOS SIN BOTONES) */
+#contacto a {
   color: var(--subtext-color);
-  font-size: 0.95rem;
-}
-
-/* CONTACTO */
-.contact-links {
+  text-decoration: none;
+  font-size: 1.1rem;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 20px;
-  max-width: 400px;
-  margin: 0 auto;
+  gap: 10px;
+  margin-bottom: 15px;
 }
 
-.contact-btn {
-  width: 100%;
-  justify-content: center;
-}
-
-.btn-email {
-  background: var(--text-color);
-  color: var(--bg-color);
-}
-
-.btn-whatsapp {
-  background: #25d366;
-  color: white;
+#contacto a:hover {
+  color: var(--accent-green);
 }
 
 /* FOOTER */
 footer {
   padding: 40px;
   text-align: center;
-  color: var(--subtext-color);
-  font-size: 0.9rem;
-  border-top: 1px solid var(--card-border);
-}
-
-/* MEDIA QUERIES */
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-  }
-  .hero h1 {
-    font-size: 3rem;
-  }
+  color: var(--subtext-color); /* Usar variable */
 }
 </style>
 
 </head>
 
-<body data-theme="dark">
+<body data-theme="dark"> <div id="particles-js"></div>
 
-<div id="particles-js"></div>
-
-<nav class="nav">
-  <div class="nav-brand">VNGAS</div>
-  <div class="nav-right">
-    <div class="nav-links">
-      <a href="#servicios">Servicios</a>
-      <a href="#proyectos">Proyectos</a>
-      <a href="#contacto">Contacto</a>
-    </div>
-    <button class="theme-toggle" onclick="toggleTheme()">
+<div class="nav">
+  <strong>VNGAS</strong>
+  <div>
+    <a href="#servicios">Servicios</a>
+    <a href="#proyectos">Proyectos</a>
+    <a href="#contacto">Contacto</a>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Cambiar tema">
       <i class="fas fa-sun"></i>
-      <i class="fas fa-moon"></i>
     </button>
   </div>
-</nav>
+</div>
 
-<section class="container hero">
+<section class="hero">
   <h1>VNGAS</h1>
-  <p>Desarrollo técnico profesional. Sistemas eficientes, seguros y escalables para la web moderna.</p>
+  <p>Desarrollo técnico profesional. Sistemas eficientes y seguros para la web moderna.</p>
 
   <div class="terminal" id="terminal"></div>
 
   <div class="buttons">
-    <a href="#proyectos" class="btn primary">Ver proyectos</a>
-    <a href="#contacto" class="btn secondary">Contactar</a>
+    <button class="btn primary">Ver proyectos</button>
+    <button class="btn secondary">Contactar</button>
   </div>
 </section>
 
-<section class="container section" id="servicios">
-  <h2 class="section-title">Servicios</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>Desarrollo de sistemas</h3>
-      <p>Creación de plataformas robustas adaptadas a las necesidades específicas de tu negocio.</p>
-    </div>
-    <div class="card">
-      <h3>APIs y backend</h3>
-      <p>Arquitectura de servidores seguros, endpoints RESTful y microservicios escalables.</p>
-    </div>
-    <div class="card">
-      <h3>Optimización</h3>
-      <p>Mejora de rendimiento de sistemas existentes y automatización de procesos técnicos.</p>
-    </div>
-  </div>
+<section class="section" id="servicios">
+  <h2>Servicios</h2>
+  <div class="card">Desarrollo de sistemas</div>
+  <div class="card">APIs y backend</div>
+  <div class="card">Optimización y automatización</div>
 </section>
 
-<section class="container section" id="proyectos">
-  <h2 class="section-title">Proyectos</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>Sistema Empresarial</h3>
-      <p>Dashboard de gestión interna con control de roles y análisis de datos en tiempo real.</p>
-    </div>
-    <div class="card">
-      <h3>Arquitectura Backend</h3>
-      <p>Procesamiento de pagos de alto volumen desarrollado en Node.js.</p>
-    </div>
-  </div>
+<section class="section" id="proyectos">
+  <h2>Proyectos</h2>
+  <div class="card">Sistema empresarial</div>
+  <div class="card">Arquitectura backend</div>
 </section>
 
-<section class="container section" id="contacto">
-  <h2 class="section-title">Contacto</h2>
-  <div class="contact-links">
-    <a href="mailto:tuemail@correo.com" class="btn contact-btn btn-email">
-      <i class="fas fa-envelope"></i> tuemail@correo.com
-    </a>
-    <a href="https://wa.me/tunumerodetelefono" target="_blank" class="btn contact-btn btn-whatsapp">
-      <i class="fab fa-whatsapp"></i> Chat por WhatsApp
-    </a>
-  </div>
+<section class="section" id="contacto">
+  <h2>Contacto</h2>
+  <a href="mailto:tuemail@correo.com">
+    <i class="fas fa-envelope"></i> tuemail@correo.com
+  </a>
+  <a href="https://wa.me/tunumerodetelefono" target="_blank">
+    <i class="fab fa-whatsapp"></i> WhatsApp
+  </a>
 </section>
 
 <footer>
@@ -376,7 +249,7 @@ footer {
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
 <script>
-/* EFECTO TERMINAL */
+/* EFECTO TERMINAL (CÓDIGO ORIGINAL SIN CAMBIOS) */
 const lines = [
   "$ initializing secure environment...",
   "$ loading modules...",
@@ -414,8 +287,21 @@ typeLine();
 function toggleTheme() {
   const currentTheme = document.body.getAttribute('data-theme');
   const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-  document.body.setAttribute('data-theme', newTheme);
-  localStorage.setItem('theme', newTheme);
+  setTheme(newTheme);
+}
+
+function setTheme(theme) {
+  document.body.setAttribute('data-theme', theme);
+  localStorage.setItem('theme', theme);
+  // Actualizar icono
+  const icon = document.querySelector('.theme-toggle i');
+  if (theme === 'dark') {
+    icon.classList.remove('fa-moon');
+    icon.classList.add('fa-sun');
+  } else {
+    icon.classList.remove('fa-sun');
+    icon.classList.add('fa-moon');
+  }
 }
 
 // Detectar preferencia del sistema
@@ -423,11 +309,11 @@ const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matche
 const savedTheme = localStorage.getItem('theme');
 
 if (savedTheme) {
-  document.body.setAttribute('data-theme', savedTheme);
+  setTheme(savedTheme);
 } else if (prefersDarkMode) {
-  document.body.setAttribute('data-theme', 'dark');
+  setTheme('dark');
 } else {
-  document.body.setAttribute('data-theme', 'light');
+  setTheme('light');
 }
 
 /* CONFIGURACIÓN DE PARTÍCULAS */
@@ -441,7 +327,7 @@ particlesJS("particles-js", {
       }
     },
     "color": {
-      "value": "#22c55e" // Se ajusta en CSS con variables
+      "value": "#22c55e" // Este color se ajusta en CSS con variables
     },
     "shape": {
       "type": "circle"
