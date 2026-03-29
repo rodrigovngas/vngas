@@ -4,252 +4,443 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>VNGAS | Desarrollo Técnico Profesional</title>
+<title>VNGAS | Desarrollo y Sistemas</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 
 <style>
-/* VARIABLES PARA MODO CLARO/OSCURO (MODIFICACIÓN PARA TEMAS) */
-:root {
-  --bg-color: #020617;
-  --text-color: #E2E8F0;
-  --subtext-color: #94A3B8;
-  --terminal-bg: rgba(255,255,255,0.02);
-  --card-border: rgba(255,255,255,0.08);
-  --accent-green: #22C55E;
-  --secondary-btn-border: rgba(255,255,255,0.2);
-  --secondary-btn-text: white;
-  --particle-color: rgba(34, 197, 94, 0.15); /* Color de partículas */
-}
-
-[data-theme="light"] {
-  --bg-color: #f8fafc;
-  --text-color: #1e293b;
-  --subtext-color: #64748b;
-  --terminal-bg: rgba(0,0,0,0.03);
-  --card-border: rgba(0,0,0,0.1);
-  --accent-green: #16a34a;
-  --secondary-btn-border: rgba(0,0,0,0.2);
-  --secondary-btn-text: #1e293b;
-  --particle-color: rgba(30, 41, 59, 0.1);
-}
-
+/* RESET & BASE */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  background: var(--bg-color); /* Usar variable */
-  color: var(--text-color); /* Usar variable */
-  font-family: 'Inter', sans-serif;
-  overflow-x: hidden; /* Para las partículas */
+html {
+  scroll-behavior: smooth; /* Navegación suave al hacer clic en el menú */
 }
 
-/* CONTENEDOR DE PARTÍCULAS (MODIFICACIÓN PARA EFECTO TECH) */
-#particles-js {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
+/* VARIABLES DE COLOR (MODO OSCURO POR DEFECTO) */
+:root {
+  --bg-primary: #020617;
+  --text-primary: #F8FAFC;
+  --text-body: #E2E8F0;
+  --text-muted: #94A3B8;
+  --accent: #22C55E;
+  --accent-hover: #1ea34d;
+  --accent-shadow: rgba(34, 197, 94, 0.2);
+  --nav-bg: rgba(2, 6, 23, 0.85);
+  --terminal-bg: rgba(15, 23, 42, 0.6);
+  --terminal-border: rgba(255,255,255,0.1);
+  --card-bg: rgba(15, 23, 42, 0.4);
+  --card-border: rgba(255,255,255,0.05);
+  --card-hover-bg: rgba(15, 23, 42, 0.8);
+  --border-light: rgba(255,255,255,0.05);
+  --contact-bg: rgba(34, 197, 94, 0.05);
+  --contact-border: rgba(34, 197, 94, 0.3);
+  --footer-color: #64748B;
+  --btn-secondary-border: rgba(255,255,255,0.2);
+  --btn-secondary-hover-bg: rgba(255,255,255,0.05);
+  --btn-secondary-hover-border: #94A3B8;
+}
+
+/* MODO CLARO */
+.light {
+  --bg-primary: #f8fafc;
+  --text-primary: #0f172a;
+  --text-body: #1e2937;
+  --text-muted: #64748b;
+  --nav-bg: rgba(248, 250, 252, 0.95);
+  --terminal-bg: rgba(241, 245, 249, 0.9);
+  --terminal-border: rgba(15, 23, 42, 0.15);
+  --card-bg: #ffffff;
+  --card-border: rgba(15, 23, 42, 0.08);
+  --card-hover-bg: #f1f5f9;
+  --border-light: rgba(15,23,42,0.1);
+  --contact-bg: rgba(34, 197, 94, 0.08);
+  --contact-border: rgba(34, 197, 94, 0.4);
+  --footer-color: #64748b;
+  --btn-secondary-border: rgba(15,23,42,0.2);
+  --btn-secondary-hover-bg: rgba(15,23,42,0.05);
+  --btn-secondary-hover-border: #475569;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-body);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+}
+
+/* CONTENEDOR GLOBAL (Para centrar y dar márgenes consistentes) */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
 /* NAV */
 .nav {
+  position: sticky; /* Se queda fijo al hacer scroll */
+  top: 0;
+  background: var(--nav-bg);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
   display: flex;
   justify-content: space-between;
-  padding: 20px 40px;
-  border-bottom: 1px solid var(--card-border); /* Usar variable */
-  position: relative; /* Asegurar que esté sobre las partículas */
-  z-index: 10;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-light);
 }
 
-.nav a {
-  color: var(--subtext-color); /* Usar variable */
+.nav-brand {
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  color: var(--text-primary);
+}
+
+.nav-links a {
+  color: var(--text-muted);
   text-decoration: none;
-  margin-left: 20px;
+  margin-left: 24px;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
 }
 
-/* SELECTOR DE TEMA (MODIFICACIÓN PARA MODO MANUAL) */
-.theme-toggle {
-  cursor: pointer;
+.nav-links a:hover {
+  color: var(--accent);
+}
+
+.theme-toggle-btn {
   background: none;
   border: none;
-  color: var(--subtext-color);
-  font-size: 1.1rem;
-  margin-left: 20px;
-  vertical-align: middle;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: var(--text-muted);
+  padding: 4px;
+  margin-left: 24px;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.theme-toggle:hover {
-  color: var(--accent-green);
+.theme-toggle-btn:hover {
+  color: var(--accent);
 }
 
 /* HERO */
 .hero {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 60px;
+  padding: 80px 0;
 }
 
 .hero h1 {
-  font-size: 3.5rem;
+  font-size: clamp(2.5rem, 5vw, 4rem); /* Tamaño fluido para móviles y PC */
   font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.1;
 }
 
 .hero p {
-  margin-top: 10px;
-  color: var(--subtext-color); /* Usar variable */
+  margin-top: 16px;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 500px;
 }
 
 /* TERMINAL STYLE */
 .terminal {
-  margin-top: 30px;
+  margin-top: 40px;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.9rem;
-  color: var(--accent-green); /* Usar variable */
-  background: var(--terminal-bg); /* Usar variable */
-  border: 1px solid var(--card-border); /* Usar variable */
-  padding: 20px;
-  width: fit-content;
+  color: var(--accent);
+  background: var(--terminal-bg);
+  border: 1px solid var(--terminal-border);
+  padding: 24px;
+  width: 100%;
+  max-width: 600px;
   border-radius: 8px;
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+}
+
+.cursor {
+  display: inline-block;
+  width: 8px;
+  height: 15px;
+  background-color: var(--accent);
+  vertical-align: middle;
+  margin-left: 5px;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 /* BUTTONS */
 .buttons {
-  margin-top: 30px;
+  margin-top: 40px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap; /* Para que bajen en móviles si no caben */
 }
 
 .btn {
-  padding: 12px 22px;
+  padding: 14px 28px;
   border-radius: 6px;
   cursor: pointer;
   border: none;
   font-weight: 500;
   font-family: inherit;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
 }
 
-.primary {
-  background: var(--accent-green); /* Usar variable */
-  color: black;
+.btn.primary {
+  background: var(--accent);
+  color: #020617;
 }
 
-.secondary {
-  border: 1px solid var(--secondary-btn-border); /* Usar variable */
+.btn.primary:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px -10px var(--accent-shadow);
+}
+
+.btn.secondary {
+  border: 1px solid var(--btn-secondary-border);
   background: transparent;
-  color: var(--secondary-btn-text); /* Usar variable */
-  margin-left: 10px;
+  color: var(--text-primary);
+}
+
+.btn.secondary:hover {
+  background: var(--btn-secondary-hover-bg);
+  border-color: var(--btn-secondary-hover-border);
+  transform: translateY(-2px);
+}
+
+/* ICONOS DE CONTACTO (solo íconos) */
+.icon-btn {
+  width: 64px;
+  height: 64px;
+  border-radius: 9999px;
+  background: var(--accent);
+  color: #020617;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px -5px var(--accent);
+}
+
+.icon-btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px -8px var(--accent);
 }
 
 /* SECTIONS */
 .section {
-  padding: 80px 60px;
-  max-width: 1100px;
+  padding: 100px 0;
 }
 
-/* CARDS */
+.section h2 {
+  font-size: 2rem;
+  color: var(--text-primary);
+  margin-bottom: 40px;
+  position: relative;
+  display: inline-block;
+}
+
+/* Adorno verde debajo de los títulos */
+.section h2::after {
+  content: '';
+  position: absolute;
+  width: 40px;
+  height: 3px;
+  background: var(--accent);
+  bottom: -10px;
+  left: 0;
+  border-radius: 2px;
+}
+
+/* GRID & CARDS */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
 .card {
-  border: 1px solid var(--card-border); /* Usar variable */
-  padding: 20px;
-  margin: 15px 0;
-  border-radius: 8px;
-  transition: 0.3s ease;
-  background: var(--terminal-bg); /* Usar variable para fondo ligero */
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  padding: 32px 24px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.card h3 {
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
 }
 
 .card:hover {
-  border-color: var(--accent-green); /* Usar variable */
-  transform: translateY(-3px);
+  border-color: var(--accent);
+  transform: translateY(-5px);
+  background: var(--card-hover-bg);
+  box-shadow: 0 10px 30px -15px var(--accent-shadow);
 }
 
-/* CONTACTO (MODIFICACIÓN PARA ICONOS SIN BOTONES) */
-#contacto a {
-  color: var(--subtext-color);
-  text-decoration: none;
-  font-size: 1.1rem;
+/* CONTACTO */
+.contact-box {
+  background: var(--contact-bg);
+  border: 1px dashed var(--contact-border);
+  padding: 40px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.contact-box p {
+  font-size: 1.2rem;
+  color: var(--text-primary);
+}
+
+.contact-icons {
+  margin-top: 32px;
   display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 15px;
-}
-
-#contacto a:hover {
-  color: var(--accent-green);
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
 }
 
 /* FOOTER */
 footer {
-  padding: 40px;
+  padding: 40px 24px;
   text-align: center;
-  color: var(--subtext-color); /* Usar variable */
+  color: var(--footer-color);
+  border-top: 1px solid var(--border-light);
+  font-size: 0.9rem;
+}
+
+/* RESPONSIVE NAV */
+@media (max-width: 600px) {
+  .nav {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .nav-links a {
+    margin: 0 10px;
+  }
+  .theme-toggle-btn {
+    margin-left: 0;
+  }
 }
 </style>
-
 </head>
+<body>
 
-<body data-theme="dark"> <div id="particles-js"></div>
+<!-- EFECTO PARTÍCULAS TIPO FONDO TECH -->
+<canvas id="particle-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none;"></canvas>
 
-<div class="nav">
-  <strong>VNGAS</strong>
-  <div>
+<nav class="nav">
+  <div class="nav-brand">VNGAS</div>
+  <div class="nav-links">
     <a href="#servicios">Servicios</a>
     <a href="#proyectos">Proyectos</a>
     <a href="#contacto">Contacto</a>
-    <button class="theme-toggle" onclick="toggleTheme()" title="Cambiar tema">
-      <i class="fas fa-sun"></i>
-    </button>
+    <button id="theme-toggle" class="theme-toggle-btn" aria-label="Cambiar modo claro/oscuro">🌙</button>
   </div>
-</div>
+</nav>
 
-<section class="hero">
+<section class="container hero">
   <h1>VNGAS</h1>
-  <p>Desarrollo técnico profesional. Sistemas eficientes y seguros para la web moderna.</p>
+  <p>Desarrollo seguro. Sistemas eficientes y escalables para la web moderna.</p>
 
-  <div class="terminal" id="terminal"></div>
+  <div class="terminal" id="terminal-container">
+    <div id="terminal"></div>
+  </div>
 
   <div class="buttons">
-    <button class="btn primary">Ver proyectos</button>
-    <button class="btn secondary">Contactar</button>
+    <a href="#proyectos" class="btn primary">Ver proyectos</a>
+    <a href="#contacto" class="btn secondary">Contactar</a>
   </div>
 </section>
 
-<section class="section" id="servicios">
+<section class="container section" id="servicios">
   <h2>Servicios</h2>
-  <div class="card">Desarrollo de sistemas</div>
-  <div class="card">APIs y backend</div>
-  <div class="card">Optimización y automatización</div>
+  <div class="grid">
+    <div class="card">
+      <h3>Desarrollo de sistemas</h3>
+      <p>Creación de plataformas robustas adaptadas a las necesidades específicas de tu negocio.</p>
+    </div>
+    <div class="card">
+      <h3>APIs y backend</h3>
+      <p>Arquitectura de servidores seguros, conexiones a bases de datos y endpoints RESTful.</p>
+    </div>
+    <div class="card">
+      <h3>Optimización</h3>
+      <p>Automatización de procesos y mejora de rendimiento para escalar tus operaciones.</p>
+    </div>
+  </div>
 </section>
 
-<section class="section" id="proyectos">
-  <h2>Proyectos</h2>
-  <div class="card">Sistema empresarial</div>
-  <div class="card">Arquitectura backend</div>
+<section class="container section" id="proyectos">
+  <h2>Proyectos Destacados</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Sistema Empresarial</h3>
+      <p>Dashboard de gestión interna con control de roles y análisis de datos en tiempo real.</p>
+    </div>
+    <div class="card">
+      <h3>Arquitectura Backend</h3>
+      <p>Microservicios desarrollados en Node.js para procesamiento de pagos de alto volumen.</p>
+    </div>
+  </div>
 </section>
 
-<section class="section" id="contacto">
+<section class="container section" id="contacto">
   <h2>Contacto</h2>
-  <a href="mailto:tuemail@correo.com">
-    <i class="fas fa-envelope"></i> tuemail@correo.com
-  </a>
-  <a href="https://wa.me/tunumerodetelefono" target="_blank">
-    <i class="fab fa-whatsapp"></i> WhatsApp
-  </a>
+  <div class="contact-box">
+    <p>¿Tienes un proyecto en mente?</p>
+    <div class="contact-icons">
+      <!-- Ícono Correo (solo ícono) -->
+      <a href="mailto:tuemail@correo.com" class="icon-btn" title="Enviar correo electrónico" aria-label="Correo electrónico">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <rect width="20" height="16" x="2" y="4" rx="2" ry="2"/>
+          <path d="m22 7-8.5 5.5L3 7"/>
+        </svg>
+      </a>
+      
+      <!-- Ícono WhatsApp (solo ícono) -->
+      <a href="https://wa.me/521234567890" target="_blank" class="icon-btn" title="Enviar mensaje por WhatsApp" aria-label="WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.198.297-.767.966-.94 1.165-.173.198-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.485-.888-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.297-.446.1-.149.05-.298-.05-.446-.099-.149-.198-.397-.446-.52-.248-.124-.298-.149-.447-.05-.15.1-.596.596-.745.894-.15.297-.15.596-.05.894.1.297.446 1.04 1.04 1.885 1.04 1.485 2.39 2.39 3.88 3.13.596.297 1.04.447 1.485.596.446.15.894.1 1.19-.15.298-.248.745-1.04 1.04-1.785.298-.745.298-1.34.15-1.485-.15-.15-.447-.298-.745-.447z"/>
+          <path d="M12 2C6.477 2 2 6.477 2 12c0 2.124.55 4.116 1.507 5.838L2 22l4.65-1.646C8.07 23.45 10 24 12 24c5.523 0 10-4.477 10-10S17.523 2 12 2z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
 </section>
 
 <footer>
   © 2026 VNGAS. Todos los derechos reservados.
 </footer>
 
-<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-
 <script>
-/* EFECTO TERMINAL (CÓDIGO ORIGINAL SIN CAMBIOS) */
 const lines = [
   "$ initializing secure environment...",
   "$ loading modules...",
@@ -258,120 +449,161 @@ const lines = [
 ];
 
 const terminal = document.getElementById("terminal");
+const terminalContainer = document.getElementById("terminal-container");
+
+// Crear el cursor parpadeante
+const cursor = document.createElement("span");
+cursor.className = "cursor";
+
 let i = 0;
 
 function typeLine() {
   if (i < lines.length) {
-    let line = document.createElement("div");
-    terminal.appendChild(line);
+    let lineContainer = document.createElement("div");
+    terminal.appendChild(lineContainer);
+    terminalContainer.appendChild(cursor); // Mantener el cursor al final
 
     let text = lines[i];
     let j = 0;
 
     function typing() {
       if (j < text.length) {
-        line.textContent += text[j];
+        lineContainer.textContent += text[j];
         j++;
-        setTimeout(typing, 30);
+        setTimeout(typing, 35); // Velocidad de escritura un poco más natural
       } else {
         i++;
-        setTimeout(typeLine, 400);
+        setTimeout(typeLine, 400); // Pausa entre líneas
       }
     }
     typing();
   }
 }
+
 typeLine();
 
-/* MODO CLARO/OSCURO MANUAL Y AUTOMÁTICO */
-function toggleTheme() {
-  const currentTheme = document.body.getAttribute('data-theme');
-  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-  setTheme(newTheme);
-}
+// ====================== MODO CLARO / OSCURO (automático + manual) ======================
+const themeToggle = document.getElementById('theme-toggle');
 
-function setTheme(theme) {
-  document.body.setAttribute('data-theme', theme);
-  localStorage.setItem('theme', theme);
-  // Actualizar icono
-  const icon = document.querySelector('.theme-toggle i');
-  if (theme === 'dark') {
-    icon.classList.remove('fa-moon');
-    icon.classList.add('fa-sun');
+function applyTheme(isLight) {
+  if (isLight) {
+    document.documentElement.classList.add('light');
+    themeToggle.textContent = '🌙';
   } else {
-    icon.classList.remove('fa-sun');
-    icon.classList.add('fa-moon');
+    document.documentElement.classList.remove('light');
+    themeToggle.textContent = '☀️';
   }
 }
 
-// Detectar preferencia del sistema
-const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-const savedTheme = localStorage.getItem('theme');
-
-if (savedTheme) {
-  setTheme(savedTheme);
-} else if (prefersDarkMode) {
-  setTheme('dark');
-} else {
-  setTheme('light');
+// Cargar tema guardado o preferencia del sistema
+function initTheme() {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme !== null) {
+    applyTheme(savedTheme === 'light');
+  } else {
+    // Automático según preferencia del dispositivo
+    const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+    applyTheme(prefersLight);
+  }
 }
 
-/* CONFIGURACIÓN DE PARTÍCULAS */
-particlesJS("particles-js", {
-  "particles": {
-    "number": {
-      "value": 80,
-      "density": {
-        "enable": true,
-        "value_area": 800
-      }
-    },
-    "color": {
-      "value": "#22c55e" // Este color se ajusta en CSS con variables
-    },
-    "shape": {
-      "type": "circle"
-    },
-    "opacity": {
-      "value": 0.5,
-      "random": false
-    },
-    "size": {
-      "value": 3,
-      "random": true
-    },
-    "line_linked": {
-      "enable": true,
-      "distance": 150,
-      "color": "#22c55e",
-      "opacity": 0.4,
-      "width": 1
-    },
-    "move": {
-      "enable": true,
-      "speed": 2,
-      "direction": "none",
-      "random": false,
-      "straight": false,
-      "out_mode": "out",
-      "bounce": false
-    }
-  },
-  "interactivity": {
-    "detect_on": "canvas",
-    "events": {
-      "onhover": {
-        "enable": true,
-        "mode": "grab"
-      },
-      "onclick": {
-        "enable": true,
-        "mode": "push"
-      }
-    }
-  },
-  "retina_detect": true
+themeToggle.addEventListener('click', () => {
+  const isCurrentlyLight = document.documentElement.classList.contains('light');
+  const newTheme = !isCurrentlyLight;
+  applyTheme(newTheme);
+  localStorage.setItem('theme', newTheme ? 'light' : 'dark');
 });
+
+// Escuchar cambios en la preferencia del sistema (solo si no hay preferencia manual guardada)
+window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+  if (!localStorage.getItem('theme')) {
+    applyTheme(e.matches);
+  }
+});
+
+initTheme();
+
+// ====================== EFECTO PARTÍCULAS TIPO FONDO TECH ======================
+const canvas = document.getElementById('particle-canvas');
+const ctx = canvas.getContext('2d');
+let particlesArray = [];
+let animationFrame;
+
+class Particle {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 3.5 + 1;
+    this.speedX = Math.random() * 0.8 - 0.4;
+    this.speedY = Math.random() * 0.8 - 0.4;
+  }
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+    if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+  }
+  draw() {
+    ctx.fillStyle = '#22C55E';
+    ctx.globalAlpha = 0.85;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+}
+
+function initParticles() {
+  particlesArray = [];
+  const numberOfParticles = Math.min(Math.floor((canvas.width * canvas.height) / 9500), 180);
+  for (let i = 0; i < numberOfParticles; i++) {
+    particlesArray.push(new Particle());
+  }
+}
+
+function connectParticles() {
+  for (let i = 0; i < particlesArray.length; i++) {
+    for (let j = i + 1; j < particlesArray.length; j++) {
+      const dx = particlesArray[i].x - particlesArray[j].x;
+      const dy = particlesArray[i].y - particlesArray[j].y;
+      const distance = Math.hypot(dx, dy);
+      if (distance < 130) {
+        ctx.strokeStyle = `rgba(34, 197, 94, ${1 - (distance / 130)})`;
+        ctx.lineWidth = 0.6;
+        ctx.beginPath();
+        ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+        ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+        ctx.stroke();
+      }
+    }
+  }
+}
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particlesArray.forEach(particle => {
+    particle.update();
+    particle.draw();
+  });
+  connectParticles();
+  animationFrame = requestAnimationFrame(animateParticles);
+}
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  initParticles();
+}
+
+window.addEventListener('resize', () => {
+  cancelAnimationFrame(animationFrame);
+  resizeCanvas();
+  animateParticles();
+});
+
+// Iniciar partículas
+resizeCanvas();
+animateParticles();
 </script>
 
 </body>
