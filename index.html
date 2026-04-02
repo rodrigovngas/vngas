@@ -43,7 +43,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 24px; /* Bajamos un poco el padding vertical para el logo */
+  padding: 12px 24px;
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
@@ -53,7 +53,7 @@ body {
 }
 
 .nav-logo {
-  height: 45px; /* Tamaño ideal para que luzca sin ser invasivo */
+  height: 45px;
   width: auto;
   display: block;
 }
@@ -80,14 +80,20 @@ body {
 }
 
 .hero h1 {
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 700;
-  color: #F8FAFC;
-  line-height: 1.1;
+  margin: 0;
+  line-height: 0; /* Evita espacios extra alrededor de la imagen */
+}
+
+/* ESTILOS DEL NUEVO LOGO EN EL HERO */
+.hero-logo {
+  width: 100%;
+  max-width: 320px; /* Tamaño adaptado para destacar sin ser invasivo */
+  height: auto;
+  display: block;
 }
 
 .hero p {
-  margin-top: 16px;
+  margin-top: 24px; /* Separación ajustada para el logo */
   font-size: 1.1rem;
   color: #94A3B8;
   max-width: 500px;
@@ -292,7 +298,7 @@ footer {
 
 <nav class="nav">
   <div class="nav-brand">
-    <img src="image.PNG" alt="VNGAS Logo" class="nav-logo">
+    <img src="isotipo.png" alt="VNGAS Logo" class="nav-logo">
   </div>
   <div class="nav-links">
     <a href="#servicios">Servicios</a>
@@ -302,7 +308,9 @@ footer {
 </nav>
 
 <section class="container hero">
-  <h1>VNGAS</h1>
+  <h1>
+    <img src="logo.png" alt="VNGAS" class="hero-logo">
+  </h1>
   <p>Desarrollo seguro. Sistemas eficientes y escalables para la web moderna.</p>
 
   <div class="terminal" id="terminal-container">
