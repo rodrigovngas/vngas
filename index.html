@@ -4,13 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="light dark">
+  <meta name="format-detection" content="telephone=no, date=no, email=no, address=no">
   
   <meta name="theme-color" content="#ffffff" id="theme-color-meta">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   
-  <title>VNGAS | Desarrollo Web</title>
-  <meta name="description" content="VNGAS - Desarrollo web con bases de datos e integración de IA. Sitios dinámicos, paneles admin y automatización. Tenango del Valle, México.">
+  <title>VNGAS | Arquitectura Web de Alto Nivel</title>
+  <meta name="description" content="VNGAS: Especialistas en arquitectura web de alto nivel con gestión de datos e IA. Desarrollamos soluciones escalables y automatización estratégica para organizaciones.">
   
   <link rel="icon" type="image/png" href="favicon.png">
   
@@ -18,14 +19,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Orbitron:wght@700&display=swap" rel="stylesheet">
   
-  <meta property="og:title" content="VNGAS | Desarrollo Web + IA + BD">
-  <meta property="og:description" content="Sitios web dinámicos con bases de datos e IA integrada. Paneles, chatbots, automatización.">
+  <meta property="og:title" content="VNGAS | Arquitectura Web de Alto Nivel">
+  <meta property="og:description" content="Desarrollamos soluciones web escalables con gestión de datos e IA integrada. Optimizamos procesos y automatizamos la atención para su organización 24/7.">
   <meta property="og:type" content="website">
   
   <style>
     :root {
       --bg: #ffffff;
-      --bg-secondary: #f0f0f5; /* Más visible en modo claro */
+      --bg-secondary: #f0f0f5;
       --text: #1d1d1f;
       --text-secondary: #6e6e73;
       --accent: #424242; 
@@ -62,6 +63,7 @@
       scroll-behavior: smooth;
       background-color: transparent; 
       transition: background-color 0.3s ease;
+      /* Se eliminó overflow-x: hidden para no romper el sticky del header */
     }
 
     body {
@@ -71,6 +73,8 @@
       line-height: 1.6;
       transition: background 0.3s ease, color 0.3s ease;
       position: relative;
+      /* Se usa clip en lugar de hidden para que position: sticky siga funcionando si hay desbordamientos */
+      overflow-x: clip; 
     }
 
     #particles-bg {
@@ -174,10 +178,6 @@
       transition: color 0.2s;
     }
 
-    .nav-links a:hover {
-      color: var(--accent);
-    }
-
     .theme-toggle {
       background: var(--bg-secondary);
       border: 1px solid var(--border);
@@ -254,7 +254,7 @@
     .status-dot {
       width: 8px;
       height: 8px;
-      background: var(--neon); /* Acento en ambos modos */
+      background: var(--neon);
       border-radius: 50%;
       animation: pulse 2s infinite;
     }
@@ -295,24 +295,11 @@
       color: #000000;
     }
 
-    .btn-primary:hover {
-      background: var(--neon);
-      color: #000000;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(118, 255, 3, 0.3);
-    }
-
     .btn-secondary {
       background: var(--bg-secondary);
       color: var(--text);
       border: 1px solid var(--border);
       box-shadow: 0 4px 15px var(--shadow);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--neon);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(118, 255, 3, 0.15);
     }
 
     .section {
@@ -363,6 +350,7 @@
       width: max-content;
       gap: 15px;
       animation: infinite-scroll 25s linear infinite;
+      will-change: transform;
     }
 
     @keyframes infinite-scroll {
@@ -383,7 +371,6 @@
       cursor: default;
     }
 
-    /* Efecto de iluminación interactivo */
     .tech-tag::before {
       content: '';
       position: absolute;
@@ -402,15 +389,6 @@
       z-index: 0;
     }
 
-    .tech-tag:hover::before {
-      opacity: 1;
-    }
-
-    .tech-tag:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(118, 255, 3, 0.15); 
-    }
-
     .tech-tag span {
       position: relative;
       z-index: 1;
@@ -418,7 +396,7 @@
 
     .services {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
       gap: 25px;
     }
 
@@ -431,12 +409,6 @@
       box-shadow: 0 10px 30px var(--shadow);
     }
 
-    .service:hover {
-      transform: translateY(-5px);
-      border-color: var(--neon);
-      box-shadow: 0 15px 35px rgba(118, 255, 3, 0.1);
-    }
-
     .service-icon {
       width: 48px;
       height: 48px;
@@ -447,12 +419,6 @@
       margin-bottom: 20px;
       border: 1px solid transparent;
       transition: all 0.3s ease;
-    }
-
-    .service:hover .service-icon {
-      border-color: var(--neon);
-      color: var(--neon);
-      background: rgba(118, 255, 3, 0.05);
     }
 
     .service h3 {
@@ -483,7 +449,7 @@
       content: '→';
       position: absolute;
       left: 0;
-      color: var(--neon); /* Acento en ambos modos */
+      color: var(--neon);
     }
 
     .service-price {
@@ -502,12 +468,6 @@
       margin: 0 auto;
       box-shadow: 0 10px 30px var(--shadow);
       transition: all 0.3s ease;
-    }
-
-    .case:hover {
-      border-color: var(--neon);
-      transform: translateY(-3px);
-      box-shadow: 0 15px 35px rgba(118, 255, 3, 0.1);
     }
 
     .case-tag {
@@ -529,7 +489,7 @@
       background: var(--bg-secondary);
       padding: 20px;
       border-radius: 10px;
-      border-left: 3px solid var(--neon); /* Acento en ambos modos */
+      border-left: 3px solid var(--neon);
       margin-top: 25px;
     }
 
@@ -604,12 +564,6 @@
       box-shadow: 0 4px 12px var(--shadow);
     }
 
-    .contact-btn:hover {
-      border-color: var(--neon);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(118, 255, 3, 0.15);
-    }
-
     .contact-btn svg {
       width: 22px;
       height: 22px;
@@ -666,10 +620,6 @@
       font-size: 0.95rem;
     }
 
-    .footer-col a:hover {
-      color: var(--accent);
-    }
-
     .footer-bottom {
       padding-top: 30px;
       border-top: 1px solid var(--border);
@@ -684,6 +634,54 @@
       margin-bottom: 15px;
       display: block;
       transition: filter 0.3s ease;
+    }
+
+    /* Solución para que los efectos hover no se queden "pegados" después del toque en el móvil */
+    @media (hover: hover) {
+      .nav-links a:hover {
+        color: var(--accent);
+      }
+      .btn-primary:hover {
+        background: var(--neon);
+        color: #000000;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(118, 255, 3, 0.3);
+      }
+      .btn-secondary:hover {
+        border-color: var(--neon);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(118, 255, 3, 0.15);
+      }
+      .tech-tag:hover::before {
+        opacity: 1;
+      }
+      .tech-tag:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(118, 255, 3, 0.15); 
+      }
+      .service:hover {
+        transform: translateY(-5px);
+        border-color: var(--neon);
+        box-shadow: 0 15px 35px rgba(118, 255, 3, 0.1);
+      }
+      .service:hover .service-icon {
+        border-color: var(--neon);
+        color: var(--neon);
+        background: rgba(118, 255, 3, 0.05);
+      }
+      .case:hover {
+        border-color: var(--neon);
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(118, 255, 3, 0.1);
+      }
+      .contact-btn:hover {
+        border-color: var(--neon);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(118, 255, 3, 0.15);
+      }
+      .footer-col a:hover {
+        color: var(--accent);
+      }
     }
 
     @media (max-width: 900px) {
@@ -740,10 +738,10 @@
         <div class="brand-name fade-in">VNGAS</div>
         <div class="status-badge fade-in">
           <div class="status-dot"></div>
-          Disponible para proyectos
+          Disponibles para nuevos proyectos
         </div>
-        <h1 class="fade-in">Webs que automatizan tu negocio</h1>
-        <p class="fade-in">Construyo sistemas con base de datos e IA integrada. Tu web deja de ser un folleto y empieza a trabajar: atiende clientes, guarda datos y vende por ti 24/7.</p>
+        <h1 class="fade-in">Arquitectura web de alto nivel</h1>
+        <p class="fade-in">Desarrollamos plataformas de alto rendimiento diseñadas para optimizar sus procesos, fortalecer su presencia comercial y generar resultados constantes para su organización 24/7.</p>
         <div class="hero-cta fade-in">
           <a href="#contacto" class="btn btn-primary">Cotizar proyecto</a>
           <a href="#servicios" class="btn btn-secondary">Servicios</a>
@@ -755,9 +753,9 @@
       <div class="container">
         <div class="about fade-in">
           <h2 class="section-title" style="text-align: left; margin-bottom: 25px;">Soluciones y Resultados</h2>
-          <p>Construyo sistemas web diseñados para ejecutar procesos complejos. Desde la arquitectura de bases de datos hasta la integración de inteligencia artificial, desarrollo herramientas que transforman la interacción con tus usuarios en datos accionables.</p>
-          <p>Utilizo un stack moderno (Node.js, React, APIs de IA) para crear paneles de administración personalizados y chatbots inteligentes que responden con base en tu propia documentación.</p>
-          <p>Mi enfoque se basa en el código limpio: sin intermediarios como WordPress. El resultado es un sitio más rápido, seguro y totalmente escalable según las necesidades de tu empresa.</p>
+          <p>Desarrollamos sistemas web diseñados para ejecutar procesos complejos. Desde la arquitectura de bases de datos hasta la integración de inteligencia artificial, implementamos herramientas que transforman la interacción con sus usuarios en datos accionables.</p>
+          <p>Utilizamos un stack tecnológico moderno para crear paneles de administración personalizados y asistentes inteligentes que responden con base en la documentación específica de su empresa.</p>
+          <p>Nuestro enfoque se basa en el desarrollo de código puro: sin intermediarios ni limitaciones de plataformas genéricas. El resultado es una infraestructura más rápida, segura y totalmente escalable, diseñada para evolucionar de forma constante al ritmo de su compañía.</p>
           
           <div class="tech-carousel-wrapper">
             <div class="tech-carousel">
@@ -786,7 +784,7 @@
     <section id="servicios" class="section">
       <div class="container">
         <h2 class="section-title fade-in">Servicios</h2>
-        <p class="section-desc fade-in">De optimización a sistemas completos con IA</p>
+        <p class="section-desc fade-in">Soluciones integrales de alto rendimiento</p>
         
         <div class="services">
           <div class="service fade-in">
@@ -795,12 +793,12 @@
                 <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
               </svg>
             </div>
-            <h3>Optimización</h3>
-            <p>Tu sitio carga lento o no convierte. Audito código, imágenes y hosting. Lo dejo volando en móvil y desktop.</p>
+            <h3>Optimización y Rendimiento</h3>
+            <p>Corregimos fallas de velocidad y optimizamos cada aspecto técnico para garantizar una carga instantánea. Mejoramos la retención de sus usuarios y su posicionamiento en buscadores.</p>
             <ul class="service-features">
-              <li>Auditoría de rendimiento</li>
-              <li>Compresión de assets</li>
-              <li>Mejora de Core Web Vitals</li>
+              <li>Auditoría de rendimiento técnico</li>
+              <li>Optimización de velocidad y carga</li>
+              <li>Mejora de experiencia en móviles</li>
             </ul>
             <div class="service-price">Desde $1,900 MXN</div>
           </div>
@@ -813,12 +811,11 @@
               </svg>
             </div>
             <h3>Landing + Base de Datos</h3>
-            <p>Página de captura conectada a BD. Los leads se guardan y te llegan al correo. Los ves en un panel simple.</p>
+            <p>Diseñamos páginas de captura de alta conversión conectadas a sistemas de almacenamiento. Automatizamos el registro de prospectos para una gestión centralizada y eficiente.</p>
             <ul class="service-features">
-              <li>Base de datos incluida</li>
-              <li>Panel para ver registros</li>
-              <li>Exportar a Excel/CSV</li>
-              <li>Notificaciones por email</li>
+              <li>Arquitectura de datos incluida</li>
+              <li>Panel de gestión de registros</li>
+              <li>Notificaciones automatizadas por correo</li>
             </ul>
             <div class="service-price">Desde $4,800 MXN</div>
           </div>
@@ -835,12 +832,11 @@
               </svg>
             </div>
             <h3>Integración de IA</h3>
-            <p>Chatbot entrenado con tus docs, respuestas automáticas por WhatsApp, análisis de datos o generación de reportes.</p>
+            <p>Implementamos asistentes inteligentes y sistemas que aprenden de su documentación. Potenciamos la atención al cliente y el análisis de información estratégica 24/7.</p>
             <ul class="service-features">
-              <li>Chatbot para tu web</li>
-              <li>Respuestas por WhatsApp/Email</li>
-              <li>Clasificación automática</li>
-              <li>Análisis de comentarios</li>
+              <li>Asistentes inteligentes personalizados</li>
+              <li>Automatización en WhatsApp y Email</li>
+              <li>Análisis de datos y reportes</li>
             </ul>
             <div class="service-price">Desde $7,500 MXN</div>
           </div>
@@ -854,12 +850,11 @@
               </svg>
             </div>
             <h3>Web App Completa</h3>
-            <p>Sistema con login, roles de usuario y panel admin. Para catálogos, citas, inventarios o CRM.</p>
+            <p>Desarrollamos sistemas robustos con acceso seguro y administración a medida. Ideal para gestionar catálogos, citas, inventarios o plataformas CRM.</p>
             <ul class="service-features">
-              <li>Login y permisos</li>
-              <li>CRUD completo</li>
-              <li>Base de datos escalable</li>
-              <li>Hosting 1 año incluido</li>
+              <li>Gestión de usuarios y permisos</li>
+              <li>Administración total de contenidos (CRUD)</li>
+              <li>Base de datos escalable y segura</li>
             </ul>
             <div class="service-price">Desde $12,500 MXN</div>
           </div>
@@ -870,15 +865,15 @@
     <section id="proyectos" class="section">
       <div class="container">
         <h2 class="section-title fade-in">Caso de éxito</h2>
-        <p class="section-desc fade-in">IA + Base de datos en acción</p>
+        <p class="section-desc fade-in">IA + Gestión de datos en acción</p>
         
         <div class="case fade-in">
           <span class="case-tag">Web App + IA</span>
-          <h3>Gloriance Design: Tienda de vestidos</h3>
-          <p><strong>Problema:</strong> Nivel de ventas limitado debido a la falta de presencia digital profesional y canales de atención inmediata, afectando la conversión de clientes potenciales.</p>
-          <p><strong>Solución:</strong> Desarrollo de sitio web con catálogo digital + chatbot con IA disponible 24/7. Brinda recomendaciones personalizadas, atención inmediata y facilita la compra o apartado en línea.</p>
+          <h3>Gloriance Design: Boutique de alta costura</h3>
+          <p><strong>El Reto:</strong> Ventas limitadas por la ausencia de una infraestructura digital profesional y canales de atención inmediata, lo que dificultaba la conversión de prospectos.</p>
+          <p><strong>Nuestra Solución:</strong> Desarrollamos una plataforma con catálogo inteligente e integración de un asistente con IA disponible 24/7. El sistema ofrece recomendaciones personalizadas y automatiza el proceso de apartado en línea.</p>
           <div class="case-result">
-            <strong>Resultado:</strong> Incremento notable en ventas. Mayor conversión de clientes interesados. Experiencia de compra moderna y eficiente. Optimización del tiempo en atención al cliente.
+            <strong>Impacto Directo:</strong> Incremento medible en el volumen de ventas. Optimización total de los tiempos de atención. Experiencia de usuario moderna y de alta conversión.
           </div>
         </div>
       </div>
@@ -887,8 +882,8 @@
     <section id="contacto" class="section">
       <div class="container">
         <div class="contact-wrapper fade-in">
-          <h2 class="section-title">¿Automatizamos tu negocio?</h2>
-          <p class="section-desc">Cuéntame qué proceso quieres mejorar y te digo si IA + BD es la solución.</p>
+          <h2 class="section-title">¿Automatizamos su organización?</h2>
+          <p class="section-desc">Analizamos sus procesos actuales para determinar la integración óptima de IA y gestión de datos.</p>
           
           <div class="contact-grid">
             <form action="https://formspree.io/f/xvzdayzv" method="POST" id="contactForm">
@@ -897,19 +892,19 @@
                 <input type="text" id="name" name="name" required>
               </div>
               <div class="form-group">
-                <label for="email">Correo</label>
+                <label for="email">Correo electrónico</label>
                 <input type="email" id="email" name="email" required>
               </div>
               <div class="form-group">
-                <label for="message">¿Qué quieres automatizar?</label>
+                <label for="message">¿Qué proceso desea optimizar?</label>
                 <textarea id="message" name="message" required></textarea>
               </div>
-              <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar mensaje</button>
+              <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar consulta técnica</button>
               <div class="form-success" id="formSuccess">¡Mensaje enviado! Te contacto pronto.</div>
             </form>
             
             <div>
-              <h4 style="margin-bottom: 20px;">O escríbeme directo:</h4>
+              <h4 style="margin-bottom: 20px;">O contáctenos directamente:</h4>
               <div class="contact-links">
                 <a href="mailto:rodrigovenegas.1009@hotmail.com" class="contact-btn">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -941,7 +936,7 @@
       <div class="footer-grid">
         <div class="footer-col">
           <img src="logo.png" alt="VNGAS" class="footer-logo">
-          <p style="color: var(--text-secondary);">Desarrollo web con bases de datos e IA integrada.</p>
+          <p style="color: var(--text-secondary);">Arquitectura web y soluciones inteligentes.</p>
         </div>
         <div class="footer-col">
           <h4>Enlaces</h4>
@@ -956,7 +951,6 @@
           <ul>
             <li><a href="mailto:rodrigovenegas.1009@hotmail.com">Correo</a></li>
             <li><a href="https://wa.me/525585378848" target="_blank">WhatsApp</a></li>
-            <li><a href="#" target="_blank">GitHub</a></li>
           </ul>
         </div>
       </div>
@@ -1114,7 +1108,6 @@
       }
       draw() {
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        // En modo claro las partículas son más oscuras para mayor visibilidad usando #424242
         ctx.fillStyle = isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(66, 66, 66, 0.6)';
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
